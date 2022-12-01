@@ -2,6 +2,13 @@
 import streamlit as st
 import os
 
+import pathlib
+from pathlib import Path
+from nsfw_detector import predict
+
+model_path = Path('model_mobilenet')/ 'saved_model.h5'
+model=predict.load_model(model_path)
+
 
 st.header('TEST IMAGE NUDITY')
 st.write("Please select an image for nudity check.")
@@ -20,20 +27,13 @@ if image_uploaded is not None:
         st.success("File Saved")
 
 
-import pathlib
-from pathlib import Path
-from nsfw_detector import predict
 
-model_path = Path('model_mobilenet')/ 'saved_model.h5'
-model=predict.load_model(model_path)
-def image_nsfw_detector(file_path):
-    res=predict.classify(model,file_path)  
-    return res
+    def image_nsfw_detector(file_path):
+        res=predict.classify(model,file_path)  
+        return res
 
-
-result = image_nsfw_detector(image_uploaded.name)
-
-st.write(result)
+    result = image_nsfw_detector(image_uploaded.name)
+    st.write(result)
 
 # print(result)
 
