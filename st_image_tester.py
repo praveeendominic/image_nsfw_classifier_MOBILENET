@@ -22,7 +22,6 @@ if image_uploaded is not None:
     # st.write(uploaded_image_path)
     fname=os.path.splitext(image_uploaded.name)
     file_ext=fname[1]
-    # st.write(file_ext)
     fname_u='tmp'+file_ext
     st.write(fname_u)
     
